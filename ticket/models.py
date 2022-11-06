@@ -23,8 +23,8 @@ class Ticket(models.Model):
         (STATUS_PENDING, "Pending"),
     )
 
-    user_id = models.ForeignKey(User, on_delete=models.PROTECT, related_name='tickets')
-    department_id = models.ForeignKey(Department, on_delete=models.PROTECT, related_name='tickets')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='tickets')
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, related_name='tickets')
     subject = models.CharField(max_length=256)
     message = models.TextField(blank=True)
     file = models.CharField(max_length=256, blank=True, null=True)

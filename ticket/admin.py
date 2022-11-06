@@ -20,7 +20,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 @register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'department_id', 'subject', 'status']
-    list_filter = ['status', 'department_id__title']
+    list_display = ['id', 'user', 'department', 'subject', 'status']
+    list_filter = ['status', 'department__title']
     search_fields = ['id', 'title']
     list_display_links = ['id', 'subject']
