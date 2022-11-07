@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users.apps.UsersConfig',
     'ticket.apps.TicketConfig',
+    'package.apps.PackageConfig',
 ]
 
 MIDDLEWARE = [
