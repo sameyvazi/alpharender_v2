@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'ticket.apps.TicketConfig',
     'package.apps.PackageConfig',
+    'transaction.apps.TransactionConfig',
 ]
 
 MIDDLEWARE = [
