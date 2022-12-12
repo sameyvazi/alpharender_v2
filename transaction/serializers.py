@@ -14,4 +14,10 @@ class TransactionSerializer(serializers.ModelSerializer):
 class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ['id', 'user']
+        fields = ['id']
+
+
+class BalanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserBalance
+        fields = '__all__'
