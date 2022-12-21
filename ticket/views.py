@@ -1,9 +1,13 @@
+from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from ticket.serializers import TicketSerializer, TicketReadSerializer
 from .models import Ticket
 from django.db.models import Q
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 
 
 class TicketViewSet(viewsets.ModelViewSet):
@@ -26,3 +30,11 @@ class TicketViewSet(viewsets.ModelViewSet):
         tickets = Ticket.objects.filter(subject__icontains=title)
         context = " - ".join([f"{ticket.id}" for ticket in tickets])
         return Response(context)
+
+
+@login_required()
+@require_http_methods(request_method_list=['POST', 'GET'])
+def test_view(request):
+    context = dict()
+    context['tickets'] = Ticket.objects.all()
+    return render(request, 'ticket/test.html', context=context)

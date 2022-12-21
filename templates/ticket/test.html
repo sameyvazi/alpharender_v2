@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hey! Title
+{% endblock %}
+
+{% block content %}
+    <h1>Hello {{ request.user.username }}</h1>
+    {% for ticket in tickets %}
+        <a>{{ ticket.id }} - {{ ticket.subject }}</a><br/>
+    {% endfor %}
+{% endblock %}
