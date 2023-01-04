@@ -1,0 +1,53 @@
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB = postgres
+      - POSTGRES_USER = postgres
+      - POSTGRES_PASSWORD = postgres
+    networks:
+      - main
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: app
+    volumes:
+      - .:/src/
+    depends_on:
+      - postgres
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    networks:
+      - main
+    restart: always
+
+  nginx:
+    container_name: nginx
+    command: nginx -g 'daemon off;'
+    depends_on:
+      - app
+    image: nginx:latest
+    networks:
+      - main
+    ports:
+      - "80:80"
+    restart: always
+    volumes:
+      - ./nginx.cong:/var/lib/nginx/nginx.conf
+networks:
+  main:
+
+volumes:
+  postgres_data:
