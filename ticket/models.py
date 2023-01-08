@@ -35,6 +35,7 @@ class Ticket(models.Model):
 
     class Meta:
         db_table = 'ticket'
+        ordering = ['-id']
 
     def __str__(self):
         return self.subject
